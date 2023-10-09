@@ -1,9 +1,9 @@
 #include "main.h"
 /**
- *  * execute - a function to execute a partcular command
- *   * @args: an array of exec commands
- *    * Return: returns a function
- *    **/
+ * execute - a function to execute a partcular command
+ * @args: an array of exec commands
+ * Return: returns a function
+ * */
 int execute(char *args[])
 {
 int background = 0;
@@ -44,13 +44,12 @@ return (launch(args, background));
 }
 #include "main.h"
 /**
- *  * launch - a function to read the buffer
- *   *
- *    * @args: args to be executed
- *     * @background: the processes id running in the background
- *      *
- *       * Return: returns 1
- *       **/
+ *  launch - a function to read the buffer
+ * 
+ * @args: args to be executed
+ * @background: the processes id running in the background
+ * Return: returns 1
+ */
 int launch(char *args[], int background)
 {
 pid_t pid;
@@ -78,41 +77,42 @@ if (!background)
 return (1);
 }
 int main() {
-	    char input[MAX_INPUT_LENGTH];
-	        char *args[MAX_ARGS];
-                  int arg_count;
-		    while (1) {
-			            char *token;
-				            int input_length;
+char input[MAX_INPUT_LENGTH];
+char *args[MAX_ARGS];
+int arg_count;
+while (1) {
+char *token;
+int input_length;
 
-					            write(STDOUT_FILENO, "#cisfun$ ", 9);
-						            fflush(stdout);
+write(STDOUT_FILENO, "#cisfun$ ", 9);
+fflush(stdout);
 
-							            if (fgets(input, sizeof(input), stdin) == NULL) {
-									                write(STDOUT_FILENO, "\n", 1);
-											            break;
-												            }
+if (fgets(input, sizeof(input), stdin) == NULL) 
+{
+write(STDOUT_FILENO, "\n", 1);
+break;
+}
 
-								            input_length = strlen(input);
+input_length = strlen(input);
 
-									            if (input_length > 0 && input[input_length - 1] == '\n') {
-											                input[input_length - 1] = '\0';
-													        }
-
-										            arg_count = 0;
-											            token = strtok(input, " ");
-												            while (token != NULL && arg_count < MAX_ARGS - 1) {
-														                args[arg_count] = token;
-																            arg_count++;
-																	                token = strtok(NULL, " ");
-																			        }
-													            args[arg_count] = NULL;
-
-														            if (arg_count > 0) {
-																                int result = execute(args);
-																		            (void)result; /*Suppress unused variable warning*/
+if (input_length > 0 && input[input_length - 1] == '\n')
+{
+input[input_length - 1] = '\0';
+}
+arg_count = 0;
+token = strtok(input, " ");
+while (token != NULL && arg_count < MAX_ARGS - 1)
+{
+args[arg_count] = token;
+arg_count++;
+token = strtok(NULL, " ");
+}
+args[arg_count] = NULL;
+if (arg_count > 0) {
+int result = execute(args);
+(void)result; /*Suppress unused variable warning*/
 																			            }
-															        }
+}
 
-		        return 0;
+return (0);
 }
