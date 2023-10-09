@@ -12,5 +12,7 @@
 #define MAX_ARGS 64
 
 /* Function declaration for wordparser_args */
-int wordsparser_args(char *input, char *args[]);
+int execute(char *args[]);
+int launch(char *args[], int background);
+
 #endif
