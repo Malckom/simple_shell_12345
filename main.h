@@ -7,33 +7,33 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
+#include <sys/stat.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <limits.h>
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARGS 64
 
 /* parsing function*/
-int execute(char *args[]);
+/*int execute(char *args[]);*/
 int launch(char *args[], int background);
-/*cd function prototype*/
-/*
-void changeCurrentDirectoryDot(char *oldpwd, int *status);
-int cd_shell(const char *dir);
-void changeCurrentDirectoryTo(my_data, const char *dir);
-void changeCurrentDirectoryToHome(char *oldpwd, int *status)    
-void changeCurrentDirectoryPrevious(char *oldpwd, int *status)
-*/
-changeCurrentDirectoryToHome(oldpwd, newpwd, &status);
-changeCurrentDirectoryToHome();
-int execute(char *args[]);
-void changeCurrentDirectoryToHome(char *oldpwd, char *newpwd, int *status);
-void changeCurrentDirectoryTo(data_shell *my_data, const char *dir);
-void changeCurrentDirectoryTo(my_data, const char *dir);
+typedef struct /*structure to hold data*/
+{
+	char **av;
+	char *input;
+	char **args;
+	int status;
+	int counter;
+	char **_environ;
+	char *pid;
 
+} CustomData;
 
-
-
-
-
+/*for kk.c*/
+int change_directory(const char *new_dir);
+void update_pwd(void);
+/*int main(int argc, char *argv[]);*/
 
 
 #endif
