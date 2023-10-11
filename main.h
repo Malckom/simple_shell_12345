@@ -53,6 +53,21 @@ int exec_command(const char *cmd, char *const args[], const EnvData *envData);
 char *exe_path(const char *cmd, const EnvData *envData);
 char *command_locate(const char *cmd, const EnvData *envData);
 int check_error_cmd(char *dir, const EnvData *envData);
-
-
+/*separ*/
+/*
+ *struct new_sep_list_s - is a single linked list
+ *@separator: used to separate ; | &
+ *@next: its the next node
+ *Description: single linked list to store separators
+ **/
+typedef struct new_sep_list_s
+{
+char separator;
+struct new_sep_list_s *next;
+} new_sep_list;
+new_sep_list *add_sep_node_end(new_sep_list **head, char sep);
+void handle_separator(new_sep_list **head, char sep);
+new_sep_list *add_line_node_end(new_sep_list **head);
+void free_add_line_list(new_sep_list **head);
+void free_add_node_list(new_sep_list **head);
 #endif
