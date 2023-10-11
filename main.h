@@ -70,4 +70,15 @@ void handle_separator(new_sep_list **head, char sep);
 new_sep_list *add_line_node_end(new_sep_list **head);
 void free_add_line_list(new_sep_list **head);
 void free_add_node_list(new_sep_list **head);
+/*separ2.c*/
+typedef struct variable_node
+{
+int variableLength;
+char *value;       
+int valueLength;   
+struct variable_node *next;
+} variable_node;
+variable_node *add_variable_node_recursive(variable_node **head, int variableLength, char *value, int valueLength);
+void free_variable_list_recursive(variable_node **head);
+
 #endif
