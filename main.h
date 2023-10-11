@@ -81,4 +81,6 @@ struct variable_node *next;
 variable_node *add_variable_node_recursive(variable_node **head, int variableLength, char *value, int valueLength);
 void free_variable_list_recursive(variable_node **head);
 
+/*betty_style.c*/
+void custom_print(const char *text);
 #endif
