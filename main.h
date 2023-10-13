@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
-
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,8 +13,21 @@
 #include <signal.h>
 #include <limits.h>
 #include <stddef.h>
+
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARGS 64
+typedef struct
+{
+char **env;
+char *path;
+char **args;
+int status;
+} EnvData;
+typedef struct {
+char *buffer;
+size_t bufsize;
+ssize_t input;
+} InputContext;
 
 /* parsing function*/
 /*int execute(char *args[]);*/
@@ -36,23 +49,19 @@ char *_getenv(const char *name, char **_environ);
 char *_strdup(const char *s);
 size_t _strlen(const char *s);
 char *_strtok(char *str, const char *delim);
+int (*get_builtin(const char *name))(EnvData *env_data);
 /*for kk.c*/
 int change_directory(const char *new_dir);
 void update_pwd(void);
-/*for path.c*/
-typedef struct 
-{
-char **env;
-char *path;
-} EnvData;
 
  /*path.c*/
 int is_xcta(EnvData *envData);
 int is_cdir(char *path, int *i);
-int exec_command(const char *cmd, char *const args[], const EnvData *envData);
+/*int exec_command(const char *cmd, char *const args[], const EnvData *envData);*/
 char *exe_path(const char *cmd, const EnvData *envData);
 char *command_locate(const char *cmd, const EnvData *envData);
 int check_error_cmd(char *dir, const EnvData *envData);
+char exec_command(const char *cmd, char *const args[], const EnvData *envData);
 /*separ*/
 /*
  *struct new_sep_list_s - is a single linked list
@@ -83,4 +92,23 @@ void free_variable_list_recursive(variable_node **head);
 
 /*betty_style.c*/
 void custom_print(const char *text);
+
+/*exit.c*/
+int exit_shell(EnvData *env_data);
+void get_error(EnvData *env_data, int error_code);
+/*build-in.c*/
+int point_of_myexit(EnvData *env_data);
+int my_change_directory(EnvData *env_data);
+/*commandline.c*/
+int comma_line(EnvData *env_data);
+/*for getline.c*/
+void init_input_context(InputContext *context, size_t initial_bufsize);
+void free_input_context(InputContext *context);
+ssize_t get_line(InputContext *context, FILE *stream);
+
+
+
+
+
+
 #endif

@@ -67,12 +67,12 @@ return (token);
  *@envData: environment data (env and path)
  *Return: 1 on success.
  **/
-int exec_command(const char *cmd, char *const args[], const EnvData *envData)
+char exec_command(const char *cmd, char *const args[], const EnvData *envData)
 {
 pid_t pd;
 pid_t wpd;
 int state;
-int exec;
+char exec;
 char *dir;
 (void) wpd;
 exec = exe_path(cmd,envData);
