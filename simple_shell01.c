@@ -76,6 +76,13 @@ if (!background)
 }
 return (1);
 }
+
+/*
+int exit_shell() {
+printf("Exiting the shell...\n");
+return 0;
+}
+*/
 int main() {
 char input[MAX_INPUT_LENGTH];
 char *args[MAX_ARGS];
@@ -111,8 +118,7 @@ args[arg_count] = NULL;
 if (arg_count > 0) {
 int result = execute(args);
 (void)result; /*Suppress unused variable warning*/
-																			            }
 }
-
+}
 return (0);
 }
