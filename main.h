@@ -29,6 +29,7 @@ size_t bufsize;
 ssize_t input;
 } InputContext;
 
+
 /* parsing function*/
 /*int execute(char *args[]);*/
 int launch(char *args[], int background);
@@ -91,8 +92,9 @@ variable_node *add_variable_node_recursive(variable_node **head, int variableLen
 void free_variable_list_recursive(variable_node **head);
 
 /*betty_style.c*/
-void custom_print(const char *text);
-
+void jackbauer_bettystyle(void);
+/*putchar.c*/
+int _putchar(char c);
 /*exit.c*/
 int exit_shell(EnvData *env_data);
 void get_error(EnvData *env_data, int error_code);
@@ -105,10 +107,6 @@ int comma_line(EnvData *env_data);
 void init_input_context(InputContext *context, size_t initial_bufsize);
 void free_input_context(InputContext *context);
 ssize_t get_line(InputContext *context, FILE *stream);
-
-
-
-
 
 
 #endif
