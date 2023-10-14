@@ -16,6 +16,10 @@
 
 #define MAX_INPUT_LENGTH 1024
 #define MAX_ARGS 64
+#define BUFSIZE 1024
+#define TOK_BUFSIZE 128
+#define TOK_DELIM " \t\r\n\a"
+
 typedef struct
 {
 char **env;
@@ -28,11 +32,6 @@ char *buffer;
 size_t bufsize;
 ssize_t input;
 } InputContext;
-<<<<<<< HEAD
-
-=======
->>>>>>> 2f8de0ba0ab0fc32f665ed50571c05bb3c5631ba
-
 /* parsing function*/
 /*int execute(char *args[]);*/
 int launch(char *args[], int background);
@@ -93,16 +92,6 @@ struct variable_node *next;
 } variable_node;
 variable_node *add_variable_node_recursive(variable_node **head, int variableLength, char *value, int valueLength);
 void free_variable_list_recursive(variable_node **head);
-
-/*betty_style.c*/
-<<<<<<< HEAD
-void jackbauer_bettystyle(void);
-/*putchar.c*/
-int _putchar(char c);
-=======
-void custom_print(const char *text);
-
->>>>>>> 2f8de0ba0ab0fc32f665ed50571c05bb3c5631ba
 /*exit.c*/
 int exit_shell(EnvData *env_data);
 void get_error(EnvData *env_data, int error_code);
@@ -115,13 +104,6 @@ int comma_line(EnvData *env_data);
 void init_input_context(InputContext *context, size_t initial_bufsize);
 void free_input_context(InputContext *context);
 ssize_t get_line(InputContext *context, FILE *stream);
-
-
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 2f8de0ba0ab0fc32f665ed50571c05bb3c5631ba
+/*memory_functions.c */
+void free_argv(custom_args *argv);
 #endif
