@@ -3,7 +3,7 @@
  * execute - a function to execute a partcular command
  * @args: an array of exec commands
  * Return: returns a function
- * */
+ */
 int execute(char *args[])
 {
 int background = 0;
@@ -16,15 +16,17 @@ return (1);
 if (strcmp(args[0], "exit") == 0)
 {
 exit(EXIT_SUCCESS);
-} else if (strcmp(args[0], "cd") == 0)
+}
+else if (strcmp(args[0], "cd") == 0)
 {
 if (args[1] == NULL)
 {
 fprintf(stderr, "shell: expected argument to 'cd'\n");
-} else
+}
+else
 {
 if (chdir(args[1]) != 0)
-{																								
+{
 perror("shell");
 }
 }
@@ -37,20 +39,18 @@ if (strcmp(args[i], "&") == 0)
 background = 1;
 args[i] = NULL;
 break;
-}
-																
+{
 }
 return (launch(args, background));
 }
-#include "main.h"
+
 /**
- *  launch - a function to read the buffer
- * 
+ * launch - a function to read the buffer
  * @args: args to be executed
  * @background: the processes id running in the background
  * Return: returns 1
  */
-int launch(char *args[], int background)
+/*int launch(char *args[], int background)
 {
 pid_t pid;
 int status;
@@ -62,39 +62,36 @@ if (execvp(args[0], args) == -1)
 perror("shell");
 exit(EXIT_FAILURE);
 }
-} else if (pid < 0)
+}
+else if (pid < 0)
 {
 perror("shell");
-} else
+}
+else
 {
 if (!background)
-{																										do {
-																										pid = waitpid(pid, &status, WUNTRACED);
-																										} while (!WIFEXITED(status) && !WIFSIGNALED(status));
-
+{
+do {
+pid = waitpid(pid, &status, WUNTRACED);
+} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 }
 }
 return (1);
-}
-
+}*/
 /*
-int exit_shell() {
-printf("Exiting the shell...\n");
-return 0;
-}
-*/
-int main() {
+int main()
+{
 char input[MAX_INPUT_LENGTH];
 char *args[MAX_ARGS];
 int arg_count;
-while (1) {
+while (1)
+{
 char *token;
 int input_length;
 
 write(STDOUT_FILENO, "#cisfun$ ", 9);
 fflush(stdout);
-
-if (fgets(input, sizeof(input), stdin) == NULL) 
+if (fgets(input, sizeof(input), stdin) == NULL)
 {
 write(STDOUT_FILENO, "\n", 1);
 break;
@@ -115,10 +112,12 @@ arg_count++;
 token = strtok(NULL, " ");
 }
 args[arg_count] = NULL;
-if (arg_count > 0) {
+if (arg_count > 0)
+{
 int result = execute(args);
-(void)result; /*Suppress unused variable warning*/
+(void)result; 
 }
 }
 return (0);
 }
+*/

@@ -1,5 +1,4 @@
 #include "main.h"
-#include "envdata.h"
 
 /**
  *exec_line - finds builtins and commands

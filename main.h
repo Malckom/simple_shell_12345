@@ -19,7 +19,6 @@
 #define BUFSIZE 1024
 #define TOK_BUFSIZE 128
 #define TOK_DELIM " \t\r\n\a"
-
 typedef struct
 {
 char **env;
@@ -48,7 +47,7 @@ typedef struct /*structure to hold data*/
 } CustomData;
 
 /*str/get fnts*/
-char *_getenv(const char *name, char **_environ);
+const char *_getenv(const char *name,const char **env);
 char *_strdup(const char *s);
 size_t _strlen(const char *s);
 char *_strtok(char *str, const char *delim);
@@ -64,8 +63,12 @@ int is_cdir(char *path, int *i);
 char *exe_path(const char *cmd, const EnvData *envData);
 char *command_locate(const char *cmd, const EnvData *envData);
 int check_error_cmd(char *dir, const EnvData *envData);
-char exec_command(const char *cmd, char *const args[], const EnvData *envData);
-/*separ*/
+int exec_command(const char *cmd, char *const args[], const EnvData *envData);
+char *_which(const char *cid, const EnvData *envData);
+
+/*char *_which(char *cid, const char **_environ);*/
+/*char *_which(EnvData *envData, char *cid);*/
+/* separ*/
 /*
  *struct new_sep_list_s - is a single linked list
  *@separator: used to separate ; | &
@@ -96,8 +99,10 @@ void free_variable_list_recursive(variable_node **head);
 int exit_shell(EnvData *env_data);
 void get_error(EnvData *env_data, int error_code);
 /*build-in.c*/
-int point_of_myexit(EnvData *env_data);
-int my_change_directory(EnvData *env_data);
+/*int (*get_builtin(char *cmd, EnvData *envData))(EnvData *);
+*int point_of_myexit(EnvData *env_data);
+*int my_change_directory(EnvData *env_data);
+*/
 /*commandline.c*/
 int comma_line(EnvData *env_data);
 /*for getline.c*/
@@ -105,5 +110,6 @@ void init_input_context(InputContext *context, size_t initial_bufsize);
 void free_input_context(InputContext *context);
 ssize_t get_line(InputContext *context, FILE *stream);
 /*memory_functions.c */
-void free_argv(custom_args *argv);
+/*void free_argv(custom_args *argv);*/
+
 #endif

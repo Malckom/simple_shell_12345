@@ -1,6 +1,6 @@
 #include "main.h"
 /* Define _getenv */
-char *_getenv(const char *name, char **env) 
+const char *_getenv(const char *name,const char **env) 
 {
 int i;
 for (i = 0; env[i] != NULL; i++)
@@ -67,12 +67,12 @@ return (token);
  *@envData: environment data (env and path)
  *Return: 1 on success.
  **/
-char exec_command(const char *cmd, char *const args[], const EnvData *envData)
+/*int exec_command(const char *cmd, char *const args[], const EnvData *envData)
 {
 pid_t pd;
 pid_t wpd;
 int state;
-char exec;
+int exec;
 char *dir;
 (void) wpd;
 exec = exe_path(cmd,envData);
@@ -120,7 +120,52 @@ wpd = waitpid(pd, &state, WUNTRACED);
 while (!WIFEXITED(state) && !WIFSIGNALED(state));
 }
 return (1);
+}*/
+/*int exec_command(const char *cmd, char *const args[], const EnvData *envData)
+{
+    pid_t pd;
+    pid_t wpd;
+    int state;
+    char *dir;
+    (void) wpd;
+    
+    dir = _which(cmd, envData);
+    
+    if (dir == NULL)
+    {
+        perror(args[0]);
+        return 1;
+    }
+
+    pd = fork();
+    
+    if (pd == 0)
+    {
+        execve(dir, args, envData->env);
+        perror(args[0]);
+        return 1;
+    }
+    else if (pd == -1)
+    {
+        perror(args[0]);
+        return 1;
+    }
+    else
+    {
+        do
+        {
+            wpd = waitpid(pd, &state, WUNTRACED);
+        }
+        while (!WIFEXITED(state) && !WIFSIGNALED(state));
+    }
+    
+    return 1;
 }
+*/
+
+
+
+
 /**
  *check_error_cmd - verifies if user has permissions to access
  *@dir: destination directory
