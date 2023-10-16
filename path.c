@@ -24,11 +24,12 @@ return (0);
  *@envData: structure containing environment variables and path
  *Return: 0 if it's not an executable, the length of the path if it is
  */
-int is_xcta(EnvData *envData)
+/*int is_xcta(EnvData *envData)*/
+int is_xcta(const char *input)
 {
 struct stat st;
 int u = 0;
-char *input = envData->path;
+/*char *input = envData->path;*/
 switch (input[u])
 {
 case '.':
@@ -66,8 +67,60 @@ return (-1);
  *@_environ: The environment variable.
  *return: The full path of the com
 */
-/*char *_which(const char *cid, const EnvData *envData)
+
+char *_which(const char *cid, const EnvData *envData)
 {
+    const char **_environ = (const char **)envData->env;
+    const char *path = _getenv("PATH", _environ);
+
+    if (path) {
+        char *ptr_path = _strdup(path);
+        char *token_path = _strtok(ptr_path, ":");
+        int u = 0;
+        struct stat st;
+char *dir;
+        while (token_path != NULL) {
+            switch (is_cdir(token_path, &u)) {
+                case 1:
+                    if (stat(cid, &st) == 0)
+                        return (char *)cid;
+                    break;
+                default:
+                    dir = malloc(strlen(token_path) + strlen(cid) + 2);
+
+                    if (dir) {
+                        strcpy(dir, token_path);
+                        strcat(dir, "/");
+                        strcat(dir, cid);
+
+                        if (stat(dir, &st) == 0) {
+                            free(ptr_path);
+                            return dir;
+                        }
+
+                        free(dir);
+                    }
+
+                    token_path = _strtok(NULL, ":");
+            }
+        }
+
+        free(ptr_path);
+        /* Handle the case where the command is not found */
+        return NULL;
+    }
+
+    if (cid[0] == '/') {
+        struct stat st;
+        if (stat(cid, &st) == 0)
+            return (char *)cid;
+    }
+
+    /* Handle the case where the command is not found */
+    return NULL;
+}
+
+/*{
     const char **_environ = (const char **)envData->env;
     const char *path = _getenv("PATH", _environ);
 
@@ -106,74 +159,74 @@ return (-1);
         }
 
         free(ptr_path);
-         Handle the case where the command is not found 
-        return NULL;
+      
+        return (NULL);
     }
 
     if (cid[0] == '/') {
         struct stat st;
         if (stat(cid, &st) == 0)
-            return (char *)cid;
+            return ((char *)cid);
     }
 
-    Handle the case where the command is not found 
-    return NULL;
+    
+    return (NULL);
 }*/
-
+/*
 char *_which(const char *cid, const EnvData *envData)
 {
-    const char **_environ = (const char **)envData->env;
-    const char *path = _getenv("PATH", _environ);
-
-    if (path) {
-        char *ptr_path = _strdup(path);
-        const size_t len_cid = strlen(cid);
-        char *token_path = _strtok(ptr_path, ":");
-        int u = 0;
-        struct stat st;
-
-        while (token_path != NULL) {
-            const size_t len_dir = strlen(token_path);
-            char *dir = malloc(len_dir + len_cid + 2);
-
-            if (dir) {
-                switch (is_cdir(token_path, &u)) {
-                    case 1:
-                        if (stat(cid, &st) == 0) {
-                            free(ptr_path);
-                            return (char *)cid;
-                        }
-                        break;
-                    default:
-                        strcpy(dir, token_path);
-                        strcat(dir, "/");
-                        strcat(dir, cid);
-
-                        if (stat(dir, &st) == 0) {
-                            free(ptr_path);
-                            return dir;
-                        }
-
-                        free(dir);
-                        break;
-                }
-            }
-
-            token_path = _strtok(NULL, ":");
-        }
-
-        free(ptr_path);
-        /* Handle the case where the command is not found */
-        return NULL;
-    }
-
-    if (cid[0] == '/') {
-        struct stat st;
-        if (stat(cid, &st) == 0)
-            return (char *)cid;
-    }
-
-    /* Handle the case where the command is not found */
-    return NULL;
+const char **_environ = (const char **)envData->env;
+const char *path = _getenv("PATH", _environ);
+if (path == 0)
+{
+char *ptr_path = _strdup(path);
+const size_t len_cid = strlen(cid);
+char *token_path = _strtok(ptr_path, ":");
+int u = 0;
+struct stat st;
+while (token_path != NULL)
+{
+const size_t len_dir = strlen(token_path);
+char *dir = malloc(len_dir + len_cid + 2);
+if (dir)
+{
+switch (is_cdir(token_path, &u))
+{
+case 1:
+if (stat(cid, &st) == 0)
+{
+free(ptr_path);
+return ((char *)cid);
 }
+break;
+default:
+strcpy(dir, token_path);
+strcat(dir, "/");
+strcat(dir, cid);
+if (stat(dir, &st) == 0)
+{
+free(ptr_path);
+return (dir);
+}
+free(dir);
+break;
+}
+}
+
+token_path = _strtok(NULL, ":");
+}
+free(ptr_path);
+*/
+/* Handle the case where the command is not found */
+/*return (NULL);
+}
+if (cid[0] == '/')
+{
+struct stat st;
+if (stat(cid, &st) == 0)
+return (char *)cid;
+}*/
+/* Handle the case where the command is not found */
+/*return (NULL);
+}*/
 
