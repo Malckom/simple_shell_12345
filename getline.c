@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  *init-input -Initializes the input context.
- *InputContext - data structure that holds information related to input handling
+ *InputContext - data structure, holds information related to input handling
  *initial_bufsize-initial size of the buffer to be allocated/
  */
 void init_input_context(InputContext *context, size_t initial_bufsize)
