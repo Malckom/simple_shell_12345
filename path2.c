@@ -1,6 +1,7 @@
 #include "main.h"
 /* Define _getenv */
-const char *_getenv(const char *name,const char **env) {
+const char *_getenv(const char *name, const char **env)
+{
 int i;
 for (i = 0; env[i] != NULL; i++)
 {
@@ -113,11 +114,9 @@ return (1);
 }
 else
 {
-do
-{
+do {
 wpd = waitpid(pd, &state, WUNTRACED);
-}
-while (!WIFEXITED(state) && !WIFSIGNALED(state));
+} while (!WIFEXITED(state) && !WIFSIGNALED(state));
 }
 return (1);
 }
@@ -151,7 +150,7 @@ else
 if (access(envData->path, X_OK) == -1)
 {
 /*Handle the case where there's no execute permission*/
-return (1);     
+return (1);
 }
 }
 return (0);

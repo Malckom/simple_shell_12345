@@ -1,6 +1,6 @@
 #include "main.h"
 /*
- * get_error - report errors related to the "exit" c0mmand
+ * get_error -function  reports errors related to the "exit" command
  * @EnvData - contains information about the environment and path for the shell
  * @int error_code - error code to be reported
  */
@@ -11,7 +11,7 @@ fprintf(stderr, "Error: Exit failed with code %d\n", error_code);
 exit(EXIT_FAILURE);
 }
 /*
- * exit_shell - handle the "exit" built-in command.
+ * exit_shell - function handles "exit" built-in command.
  * @EnvData - has environment, path, and a status code.
  * return - 1 on error, 0 success.
  */
