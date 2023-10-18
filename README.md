@@ -1,28 +1,11 @@
-Shells read configuration files in various circumstances. These files usually contain commands for the shell and are executed when loaded; they are usually used to set important variables used to find executables, like $PATH, and others that control the behavior and appearance of the shell. The table in this section shows the configuration files for popular shells.[11]
-
-Configuration file	sh	ksh	csh	tcsh	bash	zsh
-/etc/.login			login	login		
-/etc/csh.cshrc			yes	yes		
-/etc/csh.login			login	login		
-~/.tcshrc				yes		
-~/.cshrc			yes	yes[a]		
-~/etc/ksh.kshrc		int.				
-/etc/sh.shrc	int.[b]					
-$ENV (typically ~/.kshrc)[12]	int.[c][d]	int.			int.[e]	
-~/.login			login	login		
-~/.logout			login	login		
-/etc/profile	login	login			login	login[f]
-~/.profile	login	login			login[g]	login[f]
-~/.bash_profile					login[g]	
-~/.bash_login					login[g]	
-~/.bash_logout					login	
-~/.bashrc					int.+n/login	
-/etc/zshenv						yes
-/etc/zprofile						login
-/etc/zshrc						int.
-/etc/zlogin						login
-/etc/zlogout						login
-~/.zshenv						yes
-~/.zprofile						login
-~/.zshrc						int.
-~/.zlogin						login
+Allowed editors: vi, vim, emacs
+All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
+All your files should end with a new line
+A README.md file, at the root of the folder of the project is mandatory
+Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
+Your shell should not have any memory leaks
+No more than 5 functions per file
+All your header files should be include guarded
+Use system calls only when you need to (why?)
+Write a README with the description of your project
+You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository. Format, see Docker
