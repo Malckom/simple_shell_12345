@@ -152,7 +152,7 @@ char *swap_char(char *input, int bool);
 void add_nodes(sep_list **head_s, line_list **head_l, char *input);
 void go_next(sep_list **list_s, line_list **list_l, dt_sh *dath);
 int split_commands(dt_sh *dath, char *input);
-char **split_line(char *input);
+/*char **split_line(char *input);*/
 /*execline.c*/
 int exec_line(dt_sh *dath);
 /*getbt.c*/
@@ -165,5 +165,9 @@ char *_which(char *cmd, char **_environ);
 int is_executable(dt_sh *dath);
 int check_error_cmd(char *dir, dt_sh *dath);
 int cmd_exec(dt_sh *dath);
-
-  #endif
+/*simpleshell*/
+int check_betty(void);
+void execute(char *token);
+int launch(char *args[], int background);     
+int split_line(char *line, char *tokens[]);  
+#endif
