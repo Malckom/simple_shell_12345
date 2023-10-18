@@ -1,28 +1,13 @@
-Shells read configuration files in various circumstances. These files usually contain commands for the shell and are executed when loaded; they are usually used to set important variables used to find executables, like $PATH, and others that control the behavior and appearance of the shell. The table in this section shows the configuration files for popular shells.[11]
+Trying to implement a custom function _setenv and _unsetenv has encountered a number of issues. Firstly, we need to check whether the environment variable being set exist in the environment variables. This was quite easier, since we can go through all the variables and see whether there is one that matches the one we want to set. If the variable exist, the function should update it.
 
-Configuration file	sh	ksh	csh	tcsh	bash	zsh
-/etc/.login			login	login		
-/etc/csh.cshrc			yes	yes		
-/etc/csh.login			login	login		
-~/.tcshrc				yes		
-~/.cshrc			yes	yes[a]		
-~/etc/ksh.kshrc		int.				
-/etc/sh.shrc	int.[b]					
-$ENV (typically ~/.kshrc)[12]	int.[c][d]	int.			int.[e]	
-~/.login			login	login		
-~/.logout			login	login		
-/etc/profile	login	login			login	login[f]
-~/.profile	login	login			login[g]	login[f]
-~/.bash_profile					login[g]	
-~/.bash_login					login[g]	
-~/.bash_logout					login	
-~/.bashrc					int.+n/login	
-/etc/zshenv						yes
-/etc/zprofile						login
-/etc/zshrc						int.
-/etc/zlogin						login
-/etc/zlogout						login
-~/.zshenv						yes
-~/.zprofile						login
-~/.zshrc						int.
-~/.zlogin						login
+If else the variable does not exist, the the function should add it to the variables. To access these environment variables we use environ which is an extern variable in the C Library.
+
+Modifying environ directly may have unexpected behavior or be non-portable in some programming environments. It's generally better to use platform-specific functions or libraries for managing environment variables. This is the issue that result to our program having Invalid read and write buffers. And if the environ was modified, then we would have unexpected characters being printed as the set variable whenever we print the variables after calling _setenv().
+
+Unexpected string as the set variable
+_setenv_error
+
+The custom _setenv & _unsetenv usage
+setenv VARIABLE_NAME VARIABLE_VALUE || unsetenv VARRIABLE_NAME
+
+Whenever the first argument passed on the program arguments is setenv || unsetenv then the functions _setenv() and _unsetenv are called respectively with the rest of the arguments.
