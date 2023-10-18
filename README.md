@@ -1,11 +1,13 @@
-Allowed editors: vi, vim, emacs
-All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
-All your files should end with a new line
-A README.md file, at the root of the folder of the project is mandatory
-Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
-Your shell should not have any memory leaks
-No more than 5 functions per file
-All your header files should be include guarded
-Use system calls only when you need to (why?)
-Write a README with the description of your project
-You should have an AUTHORS file at the root of your repository, listing all individuals having contributed content to the repository. Format, see Docker
+Trying to implement a custom function _setenv and _unsetenv has encountered a number of issues. Firstly, we need to check whether the environment variable being set exist in the environment variables. This was quite easier, since we can go through all the variables and see whether there is one that matches the one we want to set. If the variable exist, the function should update it.
+
+If else the variable does not exist, the the function should add it to the variables. To access these environment variables we use environ which is an extern variable in the C Library.
+
+Modifying environ directly may have unexpected behavior or be non-portable in some programming environments. It's generally better to use platform-specific functions or libraries for managing environment variables. This is the issue that result to our program having Invalid read and write buffers. And if the environ was modified, then we would have unexpected characters being printed as the set variable whenever we print the variables after calling _setenv().
+
+Unexpected string as the set variable
+_setenv_error
+
+The custom _setenv & _unsetenv usage
+setenv VARIABLE_NAME VARIABLE_VALUE || unsetenv VARRIABLE_NAME
+
+Whenever the first argument passed on the program arguments is setenv || unsetenv then the functions _setenv() and _unsetenv are called respectively with the rest of the arguments.
